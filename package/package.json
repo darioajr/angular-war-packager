@@ -1,0 +1,28 @@
+{
+  "name": "angular-war-packager",
+  "version": "1.0.0",
+  "description": "Packages an Angular 18+ project into a WAR file with a web.xml.",
+  "main": "index.js",
+  "bin": {
+    "ng-war": "./index.js"
+  },
+  "dependencies": {
+    "archiver": "^5.3.1",
+    "fs-extra": "^11.2.0",
+    "yargs": "^17.7.2"
+  },
+  "keywords": ["angular", "war", "web.xml", "packager"],
+  "author": {
+        "name": "Dario Alves Junior",
+        "email": "darioajr@gmail.com"
+  },
+  "homepage": "https://github.com/darioajr/angular-war-packager",
+  "bugs": {
+      "url": "https://github.com/darioajr/angular-war-packager/issues"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+ssh://git@github.com/darioajr/angular-war-packager.git"
+  },
+  "license": "Apache-2.0"
+}
