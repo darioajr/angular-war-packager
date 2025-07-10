@@ -63,6 +63,10 @@ const buildAndPackage = async () => {
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/index.html</location>
+  </error-page>
 </web-app>`;
 
   await fs.writeFile(path.join(webInfDir, 'web.xml'), webXml);
