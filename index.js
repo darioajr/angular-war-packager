@@ -9,19 +9,19 @@ const yargs = require('yargs');
 const argv = yargs
   .option('output', {
     alias: 'o',
-    description: 'Nome do arquivo WAR de saída',
+    description: 'Output WAR file name',
     type: 'string',
     default: 'dist/app.war'
   })
   .option('context', {
     alias: 'c',
-    description: 'Nome do contexto (web-app)',
+    description: 'Context name (web-app)',
     type: 'string',
     default: 'AngularApp'
   })
   .option('dist-folder', {
     alias: 'd',
-    description: 'Caminho da pasta de build do Angular (por padrão: dist/)',
+    description: 'Angular build folder path (default: dist/)',
     type: 'string',
     default: 'dist'
   })
@@ -31,28 +31,28 @@ const argv = yargs
 const buildAndPackage = async () => {
   const distRoot = argv['dist-folder'];
 
-  // verifica se a pasta dist existe
+  // check if the dist folder exists
   if (!fs.existsSync(distRoot)) {
-    throw new Error(`A pasta '${distRoot}' não existe. Execute 'ng build' primeiro ou use --dist-folder para informar o caminho.`);
+    throw new Error(`The folder '${distRoot}' does not exist. Run 'ng build' first or use --dist-folder to specify the path.`);
   }
 
-  // detecta subdiretório do projeto dentro do dist/
+  // detect project subdirectory inside dist/
   const projects = fs.readdirSync(distRoot).filter(f => fs.statSync(path.join(distRoot, f)).isDirectory());
   if (projects.length === 0) {
-    throw new Error(`Nenhum subdiretório encontrado em '${distRoot}/'.`);
+    throw new Error(`No subdirectory found in '${distRoot}/'.`);
   }
 
-  const projectName = projects[0]; // usa o primeiro projeto encontrado
+  const projectName = projects[0]; // use the first project found
   const rootDist = path.join(distRoot, projectName);
 
-  // se existir pasta 'browser', é a que deve ser empacotada
+  // if 'browser' folder exists, it should be packaged
   const buildDir = fs.existsSync(path.join(rootDist, 'browser'))
     ? path.join(rootDist, 'browser')
     : rootDist;
 
   const webInfDir = path.join(buildDir, 'WEB-INF');
 
-  console.log('📁 Criando estrutura WAR...');
+  console.log('📁 Creating WAR structure...');
   await fs.ensureDir(webInfDir);
 
   const webXml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -71,14 +71,14 @@ const buildAndPackage = async () => {
 
   await fs.writeFile(path.join(webInfDir, 'web.xml'), webXml);
 
-  console.log('📦 Compactando para WAR...');
+  console.log('📦 Packaging to WAR...');
   await fs.ensureDir(path.dirname(argv.output));
 
   const output = fs.createWriteStream(argv.output);
   const archive = archiver('zip', { zlib: { level: 9 } });
 
   output.on('close', () => {
-    console.log(`✅ WAR gerado com sucesso: ${argv.output} (${archive.pointer()} bytes)`);
+    console.log(`✅ WAR successfully generated: ${argv.output} (${archive.pointer()} bytes)`);
   });
 
   archive.on('error', err => {
@@ -91,6 +91,6 @@ const buildAndPackage = async () => {
 };
 
 buildAndPackage().catch(err => {
-  console.error('❌ Erro ao empacotar WAR:', err.message || err);
+  console.error('❌ Error packaging WAR:', err.message || err);
   process.exit(1);
 });

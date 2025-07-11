@@ -25,6 +25,19 @@ jobs:
       - name: Run basic validation (optional)
         run: node index.js --help
 
+      - name: Generate .tgz package
+        run: npm pack
+
+      - name: Get package version
+        id: pkg
+        run: echo "version=$(node -p \"require('./package/package.json').version\")" >> $GITHUB_OUTPUT
+
+      - name: Upload .tgz as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-war-packager-${{ steps.pkg.outputs.version }}.tgz
+          path: "*.tgz"
+
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

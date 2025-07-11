@@ -1,6 +1,6 @@
 {
   "name": "angular-war-packager",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Packages an Angular 18+ project into a WAR file with a web.xml.",
   "main": "index.js",
   "bin": {

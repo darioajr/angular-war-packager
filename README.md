@@ -1,10 +1,10 @@
 # 📦 angular-war-packager
 
-Empacota aplicações Angular (v18+) como arquivos `.war` prontos para servidores Java EE, incluindo um `WEB-INF/web.xml` automaticamente.
+Packages Angular applications (v18+) as `.war` files ready for Java EE servers, including an automatic `WEB-INF/web.xml`.
 
 ---
 
-## 🚀 Instalação
+## 🚀 Installation
 
 ### Global:
 
@@ -12,45 +12,44 @@ Empacota aplicações Angular (v18+) como arquivos `.war` prontos para servidore
 npm install -g angular-war-packager
 ```
 
-### Ou local (dev dependency):
+### Or local (dev dependency):
 
 ```bash
 npm install --save-dev angular-war-packager
 ```
 
-### 🔽 Ou baixe diretamente o pacote `.tgz`:
+### 🔽 Or download the `.tgz` package directly:
 
-[⬇️ Download angular-war-packager-1.0.0.tgz](https://github.com/darioajr/angular-war-packager/releases/download/v1.0.0/angular-war-packager-1.0.0.tgz)
+[⬇️ Download angular-war-packager-x.x.x.tgz](https://github.com/darioajr/angular-war-packager/releases)
 
-> Substitua o link acima após criar um release no GitHub com o arquivo `.tgz` anexado.
 
 ---
 
-## ⚙️ Uso
+## ⚙️ Usage
 
 ```bash
 npx ng-war
 ```
 
-### Exemplo completo:
+### Full example:
 
 ```bash
-npx ng-war --output dist/meuapp.war --context MeuAppAngular --dist-folder dist
+npx ng-war --output dist/myapp.war --context MyAngularApp --dist-folder dist
 ```
 
 ---
 
-## 🔧 Opções disponíveis
+## 🔧 Available options
 
-| Parâmetro             | Descrição                                                                  |
+| Parameter             | Description                                                               |
 |-----------------------|---------------------------------------------------------------------------|
-| `--output`, `-o`      | Nome do WAR gerado (default: `dist/app.war`)                               |
-| `--context`, `-c`     | Nome do contexto usado no `web.xml` (default: `AngularApp`)                |
-| `--dist-folder`, `-d` | Caminho para a pasta de saída do `ng build` (default: `dist/`)             |
+| `--output`, `-o`      | Name of the generated WAR (default: `dist/app.war`)                       |
+| `--context`, `-c`     | Context name used in `web.xml` (default: `AngularApp`)                    |
+| `--dist-folder`, `-d` | Path to the output folder from `ng build` (default: `dist/`)              |
 
 ---
 
-## 📂 Estrutura gerada
+## 📂 Generated structure
 
 ```
 dist/
@@ -63,7 +62,7 @@ dist/
 
 ---
 
-## 🧪 Teste rápido
+## 🧪 Quick test
 
 ```bash
 ng new angular-war-test
@@ -74,13 +73,23 @@ npx ng-war
 
 ---
 
-## 🛡️ Requisitos
+## 🛡️ Requirements
 
 - Node.js 16+
-- Angular CLI com `ng build` executado
+- Angular CLI with `ng build` executed
 
 ---
 
-## 📄 Licença
+## 🧬 Automation with GitHub Actions
 
-[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) © [Seu Nome]
+This project can be published automatically to npm with a `v*` tag push. See the workflow at:
+
+```yaml
+.github/workflows/publish-npm.yml
+```
+
+---
+
+## 📄 License
+
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ©Dario Alves
